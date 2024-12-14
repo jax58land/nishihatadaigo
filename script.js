@@ -68,26 +68,32 @@ const bgm = document.getElementById("bgm");
 // BGMの音量を1/4に設定
 bgm.volume = 0.25;
 
-// ゲーム開始処理
+// ゲームの初期化
 function initializeGame() {
     document.getElementById("start-section").style.display = 'none';
-    document.getElementById("story-section").style.display = 'block';
-    document.getElementById("question-section").style.display = 'block';
     startGame();
 }
 
 function startGame() {
-    bgm.play(); // ユーザー操作後にBGMを再生
-    resetGame();
-    showQuestion();
+    bgm.play();
+    resetGame(); // リセット処理
+    showQuestion(); // 1問目を表示
 }
 
 function resetGame() {
     currentQuestion = 0;
     score = 0;
+
+    // すべてのセクションを非表示に設定
     document.getElementById("failure-section").style.display = 'none';
     document.getElementById("result-section").style.display = 'none';
     document.getElementById("reward-section").style.display = 'none';
+    document.getElementById("story-section").style.display = 'none';
+    document.getElementById("question-section").style.display = 'none';
+
+    // 必要なセクションだけ表示
+    document.getElementById("story-section").style.display = 'block';
+    document.getElementById("question-section").style.display = 'block';
 }
 
 function showQuestion() {
@@ -127,9 +133,11 @@ function checkAnswer(selected) {
 }
 
 function showFailure(failure) {
+    // 他のセクションを非表示に
     document.getElementById("story-section").style.display = 'none';
     document.getElementById("question-section").style.display = 'none';
 
+    // 失敗セクションを表示
     const failureElem = document.getElementById("failure-section");
     failureElem.style.display = 'block';
 
@@ -141,13 +149,16 @@ function showFailure(failure) {
     failureMessageElem.textContent = failure.message;
     failureImageElem.src = failure.image;
 
+    // 「もう一度挑戦する」で最初の問題に戻る
     document.getElementById("retry-btn").onclick = startGame;
 }
 
 function showResult() {
+    // 他のセクションを非表示に
     document.getElementById("story-section").style.display = 'none';
     document.getElementById("question-section").style.display = 'none';
 
+    // 結果セクションを表示
     const resultElem = document.getElementById("result-section");
     resultElem.style.display = 'block';
 
@@ -155,19 +166,23 @@ function showResult() {
     const messageElem = document.getElementById("result-message");
 
     if (score === questions.length) {
-        titleElem.textContent = "成功！";
+        titleElem.textContent = "感動のエンディング！";
         messageElem.textContent = "西畑大吾は人間に戻り、再びアイドルとして輝きました！";
         document.getElementById("reward-btn").onclick = showReward;
     } else {
-        titleElem.textContent = "失敗...";
-        messageElem.textContent = "西畑大吾はモンスターの王として君臨しました。";
+        titleElem.textContent = "失敗エンディング...";
+        messageElem.textContent = "西畑大吾は混乱したままモンスターの王として君臨しました。";
         document.getElementById("reward-btn").style.display = 'none';
     }
 }
 
 function showReward() {
+    // 結果セクションを非表示
     document.getElementById("result-section").style.display = 'none';
-    document.getElementById("reward-section").style.display = 'block';
+
+    // 報酬セクションを表示
+    const rewardElem = document.getElementById("reward-section");
+    rewardElem.style.display = 'block';
 
     document.getElementById("restart-btn").onclick = () => {
         document.getElementById("start-section").style.display = 'block';
