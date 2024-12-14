@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #2c3e50, #bdc3c7);
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#game-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#story-section {
+    margin-bottom: 20px;
+    animation: fadeIn 2s;
+}
+
+#scene-image, #failure-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 10px auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#question-section, #failure-section, #result-section {
+    animation: fadeIn 1s;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#failure-section, #result-section {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#reward-section img {
+    width: 600px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+}
+
+#reward-section {
+    text-align: center;
+    animation: fadeIn 1s;
+}
